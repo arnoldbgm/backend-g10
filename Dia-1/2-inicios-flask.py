@@ -8,6 +8,8 @@ app = Flask(__name__)
 def inicio():
     return 'Hola desde mi servidor de Flask'
 
-
+@app.route('/saludo', methods=['GET','POST'])
+def saludo():
+    return 'Hola mundo gaas'
 # debug > cada vez que modifiquemos algun archivo del proyecto y guardamos, se reiniciara el servidor
 app.run(debug=True)
