@@ -78,4 +78,48 @@ INSERT INTO tareas (id, titulo, descripcion, usuario_id) VALUES (DEFAULT, 'Ir a 
                                                                 (DEFAULT, 'Comer pizza', 'Comer una sabrosa pizza con peperoni', 1);
                                                                 
 select * from tareas where usuario_id = 1;
-                                                                G
+
+select * from tareas where usuario_id = 1 and titulo like '%comer%';
+							
+-- Si queremos hacer la distincion entre mays y min antes de colocar el texto usaremos
+-- BINARY y esto sirve para que compare a nivel de numeros de caracteres usando el ASCII
+select * from usuarios where nombre like binary 'a%'; 
+
+-- Con el '_' indico cuantos caracteres debe de saltar, para que busque el caracter indicado
+select * from usuarios where nombre like binary '_r%';
+
+select * from tareas;
+
+-- inner join, es como juntar ambas tablas
+
+INSERT INTO tareas (id, titulo, descripcion, usuario_id) VALUES (DEFAULT, 'no hacer nada', 'no hacer nada porque es domingo', null);
+
+select * from tareas;
+
+insert into tareas (id, titulo, descripcion, usuario_id) VALUES (DEFAULT, 'Jugar LOL', 'Jugar con mis amigos pros', 3);
+
+-- interesecion entre usuarios y tareas donde id sea igual a usuario_id
+select * from usuarios INNER JOIN tareas ON usuarios.id = tareas.usuario_id;
+-- Trae a toda la tabla usuarios y me muestra que tareas tienen y si no tiene sale null
+select * from usuarios left join tareas ON usuarios.id = tareas.usuario_id;
+-- Trae a la tabla tareas a todo y me muestra al id y su nombre 
+select * from usuarios right join tareas ON usuarios.id = tareas.usuario_id;
+
+-- Full outer join 
+select * from usuarios left join tareas ON usuarios.id = tareas.usuario_id UNION
+select * from usuarios right join tareas ON usuarios.id = tareas.usuario_id;
+
+-- UNION mezcla las 2 o mas consultas en una sola tabla virtual pero estas consultas tienen
+-- que tener el mismo numero de columans, sino la union es incorrecta
+SELECT id from usuarios UNION
+SELECT titulo from tareas;
+
+-- CONCACTENAR > juntar combinar
+select concat(titulo,' ', descripcion) AS 'Nombre Completo' FROM tareas;
+
+-- 1. Devolver todos los usuarios cuyo DNI contengan el numero 5
+Select * from usuarios where dni like '%5%';
+-- 2. Devolver todos los usuarios cuyo DNI tengan el tercer digito 8
+Select * from usuarios where dni like '__0%';
+-- 3. Devolver todas las tareas del usuario 'Eduardo'
+select * from usuarios INNER JOIN tareas ON usuarios.id = tareas.usuario_id where nombre = 'Eduardo';
