@@ -1,5 +1,5 @@
 from flask import Flask
-
+from controllers.productos import ProductosController
 # Con poner __name__ indicamos que se llamar a Flask
 app = Flask(__name__)
 
@@ -7,3 +7,10 @@ app = Flask(__name__)
 def index():
     return "mi aplicacion con Flask :D"
 
+@app.route("/productos" , methods = ['GET'])
+def productos():
+    controller = ProductosController()
+    return controller.listarProductos()
+
+if __name__ == '__main__':
+    app.run(debug=True)
