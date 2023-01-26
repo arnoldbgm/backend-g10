@@ -1,6 +1,7 @@
 from app import app
 from controllers.categorias_controller import CategoriasController
 from flask import request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 @app.route("/categorias/crear", methods=['POST'])
 def categoriasCrear( ):
@@ -18,7 +19,9 @@ def categoriasEliminar( categoria_id):
     return controller.eliminarCategoria(categoria_id)   
 
 @app.route("/categorias/listar", methods=['GET'])
+@jwt_required()
 def categoriasListar( ):
+    user_id = get_jwt_identity()
     controller = CategoriasController()
-    return controller.listarCategorias()   
+    return controller.listarCategorias(user_id)   
 

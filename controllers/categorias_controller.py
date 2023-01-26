@@ -1,6 +1,6 @@
 from models.categorias_model import CategoriasModel
 from db import db
-
+import pandas
 class CategoriasController:
     def __init__(self) -> None:
         self.model = CategoriasModel
@@ -20,12 +20,18 @@ class CategoriasController:
                 'error': str(e)
             }
     
-    def listarCategorias(self):
+    def listarCategorias(self, id):
         try:
-            categorias = self.model.query.all()
-            response = []
-            for categoria in categorias:
-                response.append(categoria.convertirJson())
+            print(id)
+            # categorias = self.model.query.all()
+            categorias = self.model.query.filter_by(estado=True).all()
+            # response = []
+            # for categoria in categorias:
+            #     response.append(categoria.convertirJson())
+            response = [
+                categoria.convertirJson()
+                for categoria in categorias
+            ]
             return{
                 'data': response
             },200
@@ -65,3 +71,16 @@ class CategoriasController:
                 'message': 'Internal server error',
                 'error': str(e)
             },500
+
+    def importarExcel(self):
+        try:
+            # categorias = self.model.query.all()
+            # documento = pandas 
+            return{
+                'message': 'Documento creado correctamente'
+            }, 200
+        except Exception as e:
+            return{
+                'message': 'Internal server error',
+                'error': str(e)
+            }, 500

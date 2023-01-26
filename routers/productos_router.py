@@ -10,7 +10,7 @@ def productosListar():
 @app.route("/productos/crear", methods=['POST'])
 def productosCrear():
     controller = ProductosController()
-    return controller.create(request.json)
+    return controller.crearProducto(request.json)
 
 @app.route("/productos/eliminar/<int:producto_id>", methods=['DELETE'])
 def productosEliminar(producto_id):

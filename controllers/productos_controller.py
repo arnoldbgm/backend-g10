@@ -1,12 +1,12 @@
 from models.productos_model import ProductosModel
-from models.categorias_productos import CategoriasProductosModel
+from models.categorias_productos_model import CategoriasProductosModel
 from db import db
 
 class ProductosController:
 
     def crearProducto(self, data):
         try:
-            producto = ProductosModel(data['nombre'], data['precio'])
+            producto = ProductosModel(data['nombre'], data['precio'], data['imagen'])
             db.session.add(producto)
             db.session.commit()
 
@@ -34,7 +34,8 @@ class ProductosController:
             response.append({
                 'id': producto.id,
                 'nombre': producto.nombre,
-                'precio': producto.precio
+                'precio': producto.precio,
+                'imagen': producto.imagen
             })
         return {
             'data': response
