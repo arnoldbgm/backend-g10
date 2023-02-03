@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductosModel
+from .models import ProductosModel, CategoriasModel, ClientesModel
 # Register your models here.
 
 class ShowFields(admin.ModelAdmin):
@@ -8,3 +8,5 @@ class ShowFields(admin.ModelAdmin):
 
 
 admin.site.register(ProductosModel, ShowFields)
+admin.site.register(CategoriasModel)
+admin.site.register(ClientesModel)

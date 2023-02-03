@@ -1,13 +1,83 @@
-# Repositorio del Backend de CodiGo
+## CREAR EL ENTORNO VIRTUAL
 
-<p align="center">
-    <img src="https://codigo.edu.pe/public/img/codigo-logo.png">
-</p>
+```py
+ python -m venv venv
+```
 
-## Este sera el repositorio del curso por las siguientes 10 semanas
+## ACTIVAR EL ENTORNO VIRTUAL
 
-Toda la informacion la podras encontrar aquí y en los links dados por el Discord
+```py
+source venv/Scripts/activate
+```
 
-Cada semana esta en una rama independiente, en la cual se ira detallando a continuación:
+## Instalamos django
+```py
+pip install django
+```
+## Ahora creamos nuestro proyecto con django
+Creamos el proyecto con el nombre "django_intro"
+```py
+django-admin startproject django_intro
+```
+Ahora corremos django
+```py
+python manage.py runserver
+```
 
-- Semana 03: <a href="https://github.com/arnoldbgm/backend-g10/tree/semana03">LINK</a>
+## Migrar los modelos
+```
+python manage.py migrate
+```
+
+## Crear un superusuario 
+
+```py
+python manage.py createsuperuser
+```
+
+## Crear una app
+
+```py
+python manage.py startapp "nombre"
+```
+
+## Registramos nuestra app en INSTALLED_APPS
+
+```py
+INSTALLED_APPS = [
+    ...,
+    'almacen'
+]
+```
+
+## Crear nuestro nuevo model y migrar
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## Aora instalamos Django Rest Framework
+
+```py
+pip install djangorestframework
+```
+
+## Agregar DRF a INSTALLED_APPS
+
+```py
+INSTALLED_APPS = [
+    ...,
+    'rest_framework'
+]
+```
+
+
+## Documentar nuestra API con Swagger y Redoc
+
+```py
+pip install drf-yasg
+```
+
+## Configuramos `drf-yasg`
+```py
+```
