@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// Crearemos una tabla
+
+model Categoria{
+  id     Int    @id @default(autoincrement())
+  nombre String @db.VarChar(100)
+  // Esta relacion hace referencia de a muchos
+  productos Producto[]
+  // @@ modificiar la configuracion de la tabla
+  // @ modifica la configuracion de la columna
+  @@map("categorias")
+}
+
+model Producto {
+  id        Int @id @default(autoincrement())
+  nobmre    String
+  // ? > sirve para indicar que la columna es nullable osea puede o no puede tener un vlaro
+  precio    Float?
+  tieneIgv  Boolean @map("tiene_igv")
+  sku       String  @unique
+  
+  categoriaId Int @map("categoria_id")
+  // Aqui creo la llave foranea, indico el campo con el que conecto
+  categoria Categoria @relation(fields: [categoriaId], references: [id])
+
+  @@map("productos")
+}
